@@ -10,12 +10,8 @@ from keras.applications.vgg16 import VGG16
 from keras.applications.vgg16 import preprocess_input as preprocess_input_vgg
 from keras.utils import image_utils
 from numpy import linalg as LA
-import os
-import h5py
-import numpy as np
 import h5py
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 import os
 
