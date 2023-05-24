@@ -92,16 +92,16 @@ def find_img(maxres, query_imgname):
     for i, index in enumerate(rank_ID[0:maxres]):
         imlist.append(imgpaths[index])
         print("image names: " + str(imgpaths[index]) + " scores: %f" % rank_score[i])
-    print("top %d images in order are: " % maxres, imlist)
 
     # 输出检索到的图片
     for i, im in enumerate(imlist):
         impath = str(im)[2:-1]  # 得到的im是一个byte型的数据格式，需要转换成字符串
         image = cv2.imread(impath)
-        # img = cv2.resize(image, (224, 224))
+        image = cv2.resize(image, (224, 224))
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         # image = Image.open(image)
-        st.image(image, caption="搜索输出 %d" % (i + 1), use_column_width='always')
+        st.image(image, caption="搜索输出 %d" % (i + 1))
+    st.text_area("排名前%d的图像依次为：" % maxres, imlist)
 
 
 def run():
@@ -112,9 +112,9 @@ def run():
         preview = st.sidebar.file_uploader('选择一张待检测的图片', ['png', 'jpg', 'jpeg'])
         if preview:
             image = Image.open(preview)
-            st.image(image, caption='待检测图片', use_column_width='always')
-            option = st.slider('返回几张相似的图片?', 1, 10, 3)
-            search_img = st.button(f"开始查找前{option}张相似图片")
+            st.image(image, caption='待检测图片')
+            option = st.sidebar.slider('返回几张相似的图片?', 1, 10, 3)
+            search_img = st.sidebar.button(f"开始查找前{option}张相似图片")
             if search_img:
                 find_img(option, preview)
 
