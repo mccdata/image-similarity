@@ -36,7 +36,7 @@ class VGGNet:
         norm_feat = feat[0] / LA.norm(feat[0])
         return norm_feat
 
-
+@st.cache_data
 def extract_feature(image_path, ):
     root = os.path.abspath('.')
     save_path = os.path.join(root, 'database', 'vgg_featureCNN.h5')
